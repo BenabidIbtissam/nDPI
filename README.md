@@ -7,43 +7,43 @@ Here is a documentation for installing and using nDPI on a Linux machine:
 
 #### Prerequisites
 
-1. **Install Required Packages**
+**Install Required Packages**
+   
    ```sh
-   sudo apt-get install software-properties-common wget
+   sudo apt-get install build-essential git gettext flex bison libtool autoconf automake pkg-config libpcap-dev libjson-c-dev libnuma-dev libpcre2-dev libmaxminddb-dev librrd-dev   ```
    ```
 
-2. **Add the Universe Repository**
+#### Installation and Compilation
+
+**Clone Repository**
+   
    ```sh
-   sudo add-apt-repository universe
+   git clone https://github.com/ntop/nDPI.git
    ```
 
-#### Installation
-
-1. **Download and Install the ntop Package**
+**Compile project**
+   
    ```sh
-   sudo wget https://packages.ntop.org/apt/22.04/all/apt-ntop.deb
-   sudo apt install ./apt-ntop.deb
+    ./autogen.sh
+    make
+
    ```
 
-2. **Clean and Update Package Lists**
+**Clean and Update Package Lists**
+   
    ```sh
    sudo apt-get clean all
    sudo apt-get update
    ```
 
-3. **Install nDPI and Dependencies**
-   ```sh
-   sudo apt-get install pfring-dkms nprobe ntopng n2disk cento ntap
-   ```
-
 #### Verify Installation
 
-1. **Check nDPI Version**
+**Check nDPI Version**
    ```sh
    ndpiReader -v
    ```
 
-2. **Check Network Interfaces**
+**Check Network Interfaces**
    ```sh
    ifconfig -a
    ip link show
@@ -51,16 +51,33 @@ Here is a documentation for installing and using nDPI on a Linux machine:
 
 #### Using nDPI
 
-1. **Capture Network Traffic**
+**Capture Network Traffic**
    ```sh
    sudo ndpiReader -i wlp1s0 -w test_capture.pcap
    ```
 
-2. **Filter TCP Traffic on Port 80**
+**Filter TCP Traffic on Port 80**
    ```sh
    sudo ndpiReader -i wlp1s0 -f "tcp port 80"
    ```
 
----
+#### Running from python script 
 
-This guide provides a step-by-step process to install and use nDPI on a Linux machine, ensuring that each command is clear and well-formatted for ease of use.
+**Install python**
+   
+```sh
+sudo apt install python3
+```
+
+**Install pyshark**
+   
+```sh
+sudo apt-get install tshark
+```
+
+**Run the scrip**
+
+```sh
+/usr/bin/python3 script.py      
+```
+
